@@ -85,7 +85,7 @@ def api_home(request):
             </ul>
 
             <footer>
-                <p>Powered by Django REST Framework • JWT Auth • drf-spectacular</p>
+                <p>Powered by Shubham Nirmal • JWT Auth • drf-spectacular</p>
             </footer>
         </div>
     </body>
