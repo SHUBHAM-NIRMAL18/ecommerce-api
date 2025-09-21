@@ -16,6 +16,82 @@ from .serializers import (
     OrderChangeStatusSerializer,
 )
 from .permissions import IsAdminRole, IsCustomerRole
+# ecom/views.py
+from django.http import HttpResponse
+
+def api_home(request):
+    html = """
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>🛍️ My E-Commerce API</title>
+        <style>
+            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 40px; line-height: 1.7; background: #f9f9f9; color: #333; }
+            h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
+            h2 { color: #2980b9; margin-top: 30px; }
+            ul { padding-left: 20px; }
+            li { margin: 8px 0; }
+            code { background: #ecf0f1; padding: 2px 6px; border-radius: 4px; font-family: monospace; }
+            a { color: #3498db; text-decoration: none; font-weight: 500; }
+            a:hover { text-decoration: underline; }
+            .container { max-width: 900px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+            .badge { display: inline-block; background: #e74c3c; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.8em; margin-left: 8px; }
+            footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; color: #7f8c8d; font-size: 0.9em; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>🛍️ Welcome to My E-Commerce API</h1>
+            <p>This is a secure, role-based REST API built with Django REST Framework.</p>
+
+            <h2>🔐 Authentication</h2>
+            <ul>
+                <li><code>POST /api/v1/register/</code> — Register new user</li>
+                <li><code>POST /api/v1/login/</code> — Login & get JWT tokens</li>
+                <li><code>POST /api/v1/token/refresh/</code> — Refresh access token</li>
+            </ul>
+
+            <h2>📚 Interactive Documentation</h2>
+            <ul>
+                <li><a href="/api/docs/">Swagger UI</a> — Try live requests</li>
+                <li><a href="/api/schema/">Download OpenAPI Schema (JSON)</a></li>
+            </ul>
+
+            <h2>📦 Categories</h2>
+            <ul>
+                <li><code>GET /api/v1/categories/</code> — List all (authenticated)</li>
+                <li><code>POST /api/v1/categories/</code> — Create (admin only) <span class="badge">ADMIN</span></li>
+                <li><code>GET /api/v1/categories/&lt;id&gt;/</code> — Retrieve</li>
+                <li><code>PUT,PATCH /api/v1/categories/&lt;id&gt;/</code> — Update (admin) <span class="badge">ADMIN</span></li>
+                <li><code>DELETE /api/v1/categories/&lt;id&gt;/</code> — Delete (admin) <span class="badge">ADMIN</span></li>
+            </ul>
+
+            <h2>🛍️ Products</h2>
+            <ul>
+                <li><code>GET /api/v1/products/</code> — List active products (customers), all (admin)</li>
+                <li><code>POST /api/v1/products/</code> — Create (admin only) <span class="badge">ADMIN</span></li>
+                <li><code>GET /api/v1/products/&lt;id&gt;/</code> — Retrieve</li>
+                <li><code>PUT,PATCH /api/v1/products/&lt;id&gt;/</code> — Update (admin) <span class="badge">ADMIN</span></li>
+                <li><code>DELETE /api/v1/products/&lt;id&gt;/</code> — Delete (admin) <span class="badge">ADMIN</span></li>
+            </ul>
+
+            <h2>🛒 Orders</h2>
+            <ul>
+                <li><code>POST /api/v1/orders/</code> — Create order (customer only) <span class="badge">CUSTOMER</span></li>
+                <li><code>GET /api/v1/orders/</code> — List own orders (customer) or all (admin)</li>
+                <li><code>GET /api/v1/orders/&lt;id&gt;/</code> — Retrieve order</li>
+                <li><code>POST /api/v1/orders/&lt;id&gt;/cancel/</code> — Cancel pending order (customer) <span class="badge">CUSTOMER</span></li>
+                <li><code>POST /api/v1/orders/&lt;id&gt;/change_status/</code> — Update status (admin) <span class="badge">ADMIN</span></li>
+            </ul>
+
+            <footer>
+                <p>Powered by Django REST Framework • JWT Auth • drf-spectacular</p>
+            </footer>
+        </div>
+    </body>
+    </html>
+    """
+    return HttpResponse(html)
 
 
 class RegisterView(generics.CreateAPIView):
