@@ -31,15 +31,7 @@ This repository exposes a simple E‑Commerce API built with Django & Django RES
 
 ---
 
-## 🔑 Test Credentials
 
-| Role      | Username | Password |
-|-----------|----------|----------|
-| **Admin**    | admin     | drf2 |
-| **Customer** | user1    | user1 |
-| **Customer** | user2    | user2 |
-
----
 
 ## Getting Started
 
@@ -62,4 +54,4 @@ This repository exposes a simple E‑Commerce API built with Django & Django RES
 
     Swagger: 
     ```bash
-    api/v1/docs/
+    api/docs/
